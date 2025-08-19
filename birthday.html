@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Special Surprise</title>
+        <style>
+            body {
+                font-family: "Poppins", sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+                overflow: hidden;
+            }
+            .container {
+                text-align: center;
+                color: #fff;
+            }
+            .hidden {
+                display: none;
+            }
+            .typewriter {
+                font-size: 2em;
+                border-right: 3px solid white;
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                animation: blinkCursor 0.7s infinite;
+            }
+            @keyframes blinkCursor {
+                50% {
+                    border-color: transparent;
+                }
+            }
+            .question-box {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            button {
+                background: white;
+                color: #ee9ca7;
+                font-size: 1em;
+                border: none;
+                padding: 12px 24px;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+            button:hover {
+                background: #ffd6d6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Home Section -->
+            <div id="home">
+                <h1 class="typewriter" id="intro"></h1>
+            </div>
+
+            <!-- Questions Section -->
+            <div id="questions" class="hidden">
+                <div class="question-box" id="question"></div>
+                <button id="nextBtn">Next</button>
+            </div>
+        </div>
+
+        <script>
+            // Typewriter effect for home page
+            const introText = "Today is all about you ✨";
+            const introEl = document.getElementById("intro");
+            let i = 0;
+
+            function typeWriter() {
+                if (i < introText.length) {
+                    introEl.textContent += introText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    // Wait 1.5s then show questions
+                    setTimeout(() => {
+                        document.getElementById("home").classList.add("hidden");
+                        document
+                            .getElementById("questions")
+                            .classList.remove("hidden");
+                        showQuestion();
+                    }, 1500);
+                }
+            }
+            typeWriter();
+
+            // Questions logic
+            const questions = ["Are you ready for a surprise?"];
+
+            let qIndex = 0;
+            const questionEl = document.getElementById("question");
+            const nextBtn = document.getElementById("nextBtn");
+
+            function showQuestion() {
+                questionEl.textContent = questions[qIndex];
+            }
+
+            nextBtn.addEventListener("click", () => {
+                qIndex++;
+                if (qIndex < questions.length) {
+                    showQuestion();
+                } else {
+                    // Redirect to your saved wish page
+                    window.location.href = "bday.html";
+                }
+            });
+        </script>
+    </body>
+</html>

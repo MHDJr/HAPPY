@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>🎁 For My Best Sister</title>
+        <style>
+            :root {
+                --bg1: #fff7e6;
+                --bg2: #ffe0f0;
+                --primary: #ff4d8d;
+                --accent: #6b5b95;
+                --gold: #f7b500;
+                --dark: #1f1f2e;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto,
+                    Arial, sans-serif;
+                color: var(--dark);
+                background: radial-gradient(
+                        1200px 600px at 20% 0%,
+                        var(--bg2),
+                        transparent
+                    ),
+                    radial-gradient(
+                        1200px 600px at 80% 100%,
+                        var(--bg1),
+                        transparent
+                    ),
+                    linear-gradient(180deg, #fff, #fff8fb);
+                overflow: hidden;
+            }
+
+            /* Center stage */
+            .stage {
+                position: relative;
+                height: 100%;
+                display: grid;
+                place-items: center;
+                padding: 16px;
+            }
+
+            /* Gift box */
+            .gift {
+                position: relative;
+                width: 220px;
+                height: 180px;
+                cursor: pointer;
+                user-select: none;
+                transform: translateY(0);
+                animation: float 3s ease-in-out infinite;
+                filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+            }
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            .box {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 70%;
+                background: linear-gradient(135deg, #ff5fa2, #ff5470);
+                border-radius: 14px;
+            }
+            .box:before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+                width: 26px;
+                height: 100%;
+                background: #ffd24d;
+            }
+
+            .lid {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 40%;
+                background: linear-gradient(135deg, #ff6fb5, #ff5a7c);
+                border-radius: 14px;
+                transform-origin: bottom;
+                transition: transform 0.7s ease;
+            }
+            .lid:before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+                width: 26px;
+                height: 100%;
+                background: #ffdd66;
+            }
+
+            .ribbon {
+                position: absolute;
+                top: -18px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 120px;
+                height: 120px;
+            }
+            .ribbon:before,
+            .ribbon:after {
+                content: "";
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border: 12px solid #ffd24d;
+                border-radius: 50% 50% 0 50%/50% 50% 0 50%;
+                transform: rotate(45deg);
+            }
+            .ribbon:before {
+                left: 0;
+            }
+            .ribbon:after {
+                right: 0;
+                transform: scaleX(-1) rotate(45deg);
+            }
+
+            .cta {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translate(-50%, 18px);
+                background: #111;
+                color: #fff;
+                padding: 10px 14px;
+                border-radius: 999px;
+                font-weight: 600;
+                letter-spacing: 0.3px;
+                box-shadow: 0 8px 20px rgba(17, 17, 17, 0.2);
+            }
+
+            /* Card revealed */
+            .card {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
+                backdrop-filter: blur(6px);
+                background: radial-gradient(
+                    600px 300px at 50% 10%,
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0.55)
+                );
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.5s ease, visibility 0.5s ease;
+            }
+            .card-inner {
+                position: relative;
+                max-width: 900px;
+                width: min(92vw, 900px);
+                padding: 28px;
+                border-radius: 24px;
+                background: linear-gradient(180deg, #ffffffee, #fff9ffdd);
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+                overflow: hidden;
+            }
+            .card-header {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+            .badge {
+                background: #ffe8f2;
+                color: #b81458;
+                padding: 6px 12px;
+                border-radius: 999px;
+                font-weight: 700;
+                font-size: 0.9rem;
+            }
+            h1 {
+                margin: 6px 0 2px;
+                font-size: clamp(28px, 6vw, 48px);
+                letter-spacing: 0.4px;
+                text-align: center;
+                color: #b10f52;
+                text-shadow: 0 1px 0 #fff;
+            }
+            .sub {
+                text-align: center;
+                font-weight: 600;
+                color: #444;
+                margin-bottom: 14px;
+            }
+
+            .msg {
+                font-size: clamp(16px, 2.3vw, 20px);
+                line-height: 1.7;
+                text-align: center;
+                margin: 14px auto;
+                max-width: 720px;
+            }
+            .dua {
+                font-weight: 800;
+                text-align: center;
+                font-size: clamp(18px, 2.6vw, 22px);
+                color: #2a3d66;
+                margin-top: 10px;
+            }
+
+            .controls {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                margin-top: 18px;
+            }
+            .btn {
+                border: 0;
+                padding: 10px 14px;
+                border-radius: 12px;
+                background: #111;
+                color: #fff;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 8px 20px rgba(17, 17, 17, 0.18);
+            }
+            .btn.alt {
+                background: #ffd24d;
+                color: #5a4100;
+            }
+
+            /* Balloons */
+            .balloon {
+                position: absolute;
+                bottom: -120px;
+                width: 38px;
+                height: 48px;
+                border-radius: 50% 50% 45% 45%;
+                background: var(--primary);
+                box-shadow: inset -6px -8px 0 rgba(255, 255, 255, 0.35);
+                opacity: 0;
+            }
+            .balloon:after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: -22px;
+                width: 2px;
+                height: 80px;
+                background: #888;
+                transform: translateX(-50%);
+            }
+
+            /* Confetti canvas */
+            #confetti {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            /* Open state */
+            .opened .lid {
+                transform: rotateX(75deg) translateY(-6px);
+            }
+            .opened .card {
+                visibility: visible;
+                opacity: 1;
+            }
+            .opened #confetti {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="confetti"></canvas>
+        <div class="stage" id="stage">
+            <div
+                class="gift"
+                id="gift"
+                aria-label="Open your surprise"
+                title="Open your surprise"
+                role="button"
+            >
+                <div class="ribbon"></div>
+                <div class="lid"></div>
+                <div class="box"></div>
+                <div class="cta">Tap to open ✨</div>
+            </div>
+
+            <div class="card" id="card">
+                <div class="card-inner">
+                    <div class="card-header">
+                        <span class="badge">FOR MY DEAREST SISTER</span>
+                    </div>
+                    <h1>Happy Birthday, my beloved sister! 🎂💖</h1>
+                    <p class="sub" id="typed"></p>
+
+                    <div class="msg">
+                        <p>
+                            <strong
+                                >“You’re not just my sister, you are my best
+                                friend, my guide, and my forever blessing from
+                                Allah.”</strong
+                            >
+                            🌙✨
+                        </p>
+                        <p>
+                            Alhamdulillah for you — the best sister in the world
+                            🌍💗. May Allah fill your days with joy, your heart
+                            with light, and your path with beautiful success in
+                            both Dunya and Akhirah.
+                        </p>
+                    </div>
+
+                    <div class="dua">
+                        اللَّهُمَّ بَارِكْ فِي عُمْرِهَا، وَارْزُقْهَا
+                        السَّعَادَةَ وَالنُّورَ فِي الدُّنْيَا وَالآخِرَةِ 🤲💞
+                    </div>
+
+                    <div class="controls">
+                        <button class="btn alt" id="replay">
+                            Replay Surprise 🔁
+                        </button>
+                        <button class="btn" id="music">Music: Off 🔇</button>
+                        <button class="btn" id="share">Share Link 🔗</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="absolute bottom-10 left-0 right-0 text-center text-gray-500 text-sm"
+        >
+            <p>Made with ❤️ by your brother</p>
+        </div>
+
+        <!-- Optional background nasheed: replace src with your own MP3 file path or URL -->
+        <audio id="bgm" preload="auto" loop>
+            <!-- Example placeholder: add your own file, e.g. <source src="nasheed.mp3" type="audio/mpeg"> -->
+        </audio>
+
+        <script>
+            const stage = document.getElementById("stage");
+            const gift = document.getElementById("gift");
+            const card = document.getElementById("card");
+            const typed = document.getElementById("typed");
+            const replayBtn = document.getElementById("replay");
+            const musicBtn = document.getElementById("music");
+            const shareBtn = document.getElementById("share");
+            const bgm = document.getElementById("bgm");
+
+            let musicOn = false;
+
+            // Typewriter lines
+            const lines = [
+                "Bismillah…",
+                "Opening your birthday surprise ✨",
+                "Because today is all about YOU 💝",
+            ];
+
+            function sleep(ms) {
+                return new Promise((r) => setTimeout(r, ms));
+            }
+
+            async function typeLines() {
+                typed.innerHTML = "";
+                for (let i = 0; i < lines.length; i++) {
+                    await type(lines[i]);
+                    await sleep(500);
+                    if (i < lines.length - 1) {
+                        typed.innerHTML += "<br />";
+                    }
+                }
+                // 👇 No more caret added here — cursor ends with typing
+            }
+
+            async function type(text) {
+                const caret = '<span class="caret">|</span>';
+                let out = "";
+                for (let i = 0; i < text.length; i++) {
+                    out += text[i];
+                    typed.innerHTML = out + caret;
+                    await sleep(24 + Math.random() * 40);
+                }
+                typed.innerHTML = out;
+            }
+
+            // Confetti
+            const confettiCanvas = document.getElementById("confetti");
+            const ctx = confettiCanvas.getContext("2d");
+            let confettiPieces = [];
+
+            function resize() {
+                confettiCanvas.width = innerWidth;
+                confettiCanvas.height = innerHeight;
+            }
+            addEventListener("resize", resize);
+            resize();
+
+            function makeConfetti() {
+                confettiPieces = Array.from({ length: 220 }, () => ({
+                    x: Math.random() * confettiCanvas.width,
+                    y: -Math.random() * confettiCanvas.height,
+                    s: Math.random() * 6 + 3,
+                    a: Math.random() * 360,
+                    v: Math.random() * 2 + 1,
+                }));
+            }
+
+            function drawConfetti() {
+                ctx.clearRect(
+                    0,
+                    0,
+                    confettiCanvas.width,
+                    confettiCanvas.height
+                );
+                confettiPieces.forEach((p) => {
+                    p.y += p.v;
+                    p.x += Math.sin(p.y / 40);
+                    if (p.y > confettiCanvas.height + 10) {
+                        p.y = -10;
+                        p.x = Math.random() * confettiCanvas.width;
+                    }
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(((p.a += 2) * Math.PI) / 180);
+                    ctx.fillStyle = `hsl(${(p.x + p.y) % 360} 90% 55%)`;
+                    ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s);
+                    ctx.restore();
+                });
+                requestAnimationFrame(drawConfetti);
+            }
+
+            // Balloons
+            function launchBalloons() {
+                const colors = [
+                    "#ff4d8d",
+                    "#5ad8a6",
+                    "#57a0ff",
+                    "#ffd24d",
+                    "#a08bff",
+                ];
+                for (let i = 0; i < 16; i++) {
+                    const b = document.createElement("div");
+                    b.className = "balloon";
+                    b.style.left = Math.random() * 100 + "vw";
+                    b.style.background =
+                        colors[Math.floor(Math.random() * colors.length)];
+                    b.style.opacity = "0";
+                    stage.appendChild(b);
+                    const delay = 200 + Math.random() * 1200;
+                    setTimeout(() => rise(b), delay);
+                }
+            }
+
+            function rise(b) {
+                const dur = 9000 + Math.random() * 4000;
+                b.animate(
+                    [
+                        { transform: "translateY(0) scale(1)", opacity: 0 },
+                        {
+                            transform: "translateY(-110vh) scale(1.08)",
+                            opacity: 1,
+                        },
+                    ],
+                    { duration: dur, easing: "cubic-bezier(.22,.61,.36,1)" }
+                );
+                setTimeout(() => b.remove(), dur);
+            }
+
+            function openSurprise() {
+                document.body.classList.add("opened");
+                stage.classList.add("opened");
+                gift.classList.add("opened");
+                card.classList.add("opened");
+                makeConfetti();
+                drawConfetti();
+                launchBalloons();
+                typeLines();
+                if (musicOn) {
+                    bgm.play().catch(() => {});
+                }
+            }
+
+            function resetSurprise() {
+                // remove balloons if any
+                document
+                    .querySelectorAll(".balloon")
+                    .forEach((b) => b.remove());
+                // reset typing
+                typed.innerHTML = "";
+                // reset classes
+                document.body.classList.remove("opened");
+                stage.classList.remove("opened");
+                gift.classList.remove("opened");
+                card.classList.remove("opened");
+                // small delay then open again
+                setTimeout(openSurprise, 250);
+            }
+
+            gift.addEventListener("click", openSurprise, { once: true });
+            replayBtn.addEventListener("click", resetSurprise);
+
+            musicBtn.addEventListener("click", () => {
+                musicOn = !musicOn;
+                if (musicOn) {
+                    musicBtn.textContent = "Music: On 🎵";
+                    bgm.volume = 0.7;
+                    bgm.play().catch(() => {});
+                } else {
+                    musicBtn.textContent = "Music: Off 🔇";
+                    bgm.pause();
+                }
+            });
+
+            shareBtn.addEventListener("click", async () => {
+                try {
+                    const url = location.href;
+                    if (navigator.share) {
+                        await navigator.share({
+                            title: "A surprise for you ❤️",
+                            text: "Open your birthday surprise!",
+                            url,
+                        });
+                    } else {
+                        await navigator.clipboard.writeText(url);
+                        alert("Link copied! Share it with your sister 💝");
+                    }
+                } catch (e) {
+                    alert(
+                        "Could not share automatically. You can copy the address bar link."
+                    );
+                }
+            });
+        </script>
+    </body>
+</html>
